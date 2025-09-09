@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block start %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +28,7 @@
 
             <!-- Add Task Form -->
             <div class="pb-3">
-              <form method="POST" action="">
+              <form method="POST" action="{% url 'create_todo' %}">
                 {% csrf_token %}
                 <div class="card">
                   <div class="card-body">
@@ -85,3 +87,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+{% endblock %}
