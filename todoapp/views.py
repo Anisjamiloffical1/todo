@@ -19,3 +19,21 @@ def create_todo(request):
         form = TodoForm()
 
     return render(request, 'todoapp/create_todo.html', {'form': form})
+
+def update_todo(request, id):
+    todo = Todo.objects.get(id=id)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todo_list')
+    else:
+        form = TodoForm(instance=todo)
+    return render(request, 'todoapp/update_todo.html', {'form': form})
+
+def delete_todo(request, id):
+    todo = Todo.objects.get(id=id)
+    if request.method == "POST":
+        todo.delete()
+        return redirect('todo_list')
+    return render(request, 'todoapp/delete_todo.html', {"todo": todo})
